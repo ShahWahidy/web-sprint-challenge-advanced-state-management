@@ -1,4 +1,4 @@
-import { LOADING, SUCCESS, ERROR } from "../actions";
+import { LOADING, SUCCESS, ERROR, ADD_SMURF } from "../actions";
 export const initialState = {
     smurfs: [],
     loading: false,
@@ -17,6 +17,22 @@ const reducer = (state = initialState, action)=>{
                 ...state,
                 loading:false,
                 smurfs:action.payload
+            
+            }
+        case ERROR:
+            return{
+                ...state,
+                loading:false,
+                error:action.payload
+            }
+        case ADD_SMURF:
+            const newSmurf ={
+                ...action.payload,
+                id: Date.now()
+            }
+            return{
+                ...state,
+                smurfs: [...state.smurfs, newSmurf]
             }
         default:
             return state;
